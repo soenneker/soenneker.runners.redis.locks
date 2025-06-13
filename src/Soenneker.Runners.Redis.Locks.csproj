@@ -44,6 +44,6 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
         <PackageReference Include="Soenneker.Redis.Lock" Version="3.0.2464" />
-        <PackageReference Include="Soenneker.Runners.Runner" Version="3.0.185" />
+        <PackageReference Include="Soenneker.Runners.Runner" Version="3.0.187" />
     </ItemGroup>
 </Project>
