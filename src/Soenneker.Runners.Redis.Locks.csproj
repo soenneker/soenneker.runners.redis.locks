@@ -41,7 +41,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Soenneker.Redis.Lock" Version="4.0.2551" />
+        <PackageReference Include="Soenneker.Redis.Lock" Version="4.0.2552" />
         <PackageReference Include="Soenneker.Runners.Runner" Version="4.0.349" />
     </ItemGroup>
 </Project>
