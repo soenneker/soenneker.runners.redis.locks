@@ -1,5 +1,4 @@
 [![](https://img.shields.io/nuget/v/soenneker.runners.redis.locks.svg?style=for-the-badge)](https://www.nuget.org/packages/soenneker.runners.redis.locks/)
-[![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.runners.redis.locks/publish-package.yml?style=for-the-badge)](https://github.com/soenneker/soenneker.runners.redis.locks/actions/workflows/publish-package.yml)
 [![](https://img.shields.io/nuget/dt/soenneker.runners.redis.locks.svg?style=for-the-badge)](https://www.nuget.org/packages/soenneker.runners.redis.locks/)
 [![](https://img.shields.io/github/actions/workflow/status/soenneker/soenneker.runners.redis.locks/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/soenneker/soenneker.runners.redis.locks/actions/workflows/codeql.yml)
 
