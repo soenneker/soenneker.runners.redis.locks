@@ -4,10 +4,11 @@
   </Folder>
   <Folder Name="/.github/workflows/">
     <File Path=".github/workflows/build-and-test.yml" />
+    <File Path=".github/workflows/codeql.yml" />
     <File Path=".github/workflows/publish-package.yml" />
   </Folder>
   <Folder Name="/src/">
-    <Project Path="src/Soenneker.Runners.Redis.Locks.csproj" />
+    <Project Path="src/Soenneker.Runners.Redis.Locks/Soenneker.Runners.Redis.Locks.csproj" />
   </Folder>
   <Folder Name="/test/">
     <Project Path="test/Soenneker.Runners.Redis.Locks.Tests/Soenneker.Runners.Redis.Locks.Tests.csproj" />
