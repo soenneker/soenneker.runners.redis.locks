@@ -1,20 +1,19 @@
-﻿using Soenneker.Runners.Redis.Locks.Abstract;
-using Soenneker.Tests.FixturedUnit;
-using Xunit;
+using Soenneker.Runners.Redis.Locks.Abstract;
+using Soenneker.Tests.HostedUnit;
 
 namespace Soenneker.Runners.Redis.Locks.Tests;
 
-[Collection("Collection")]
-public class RedisLocksRunnerTests : FixturedUnitTest
+[ClassDataSource<Host>(Shared = SharedType.PerTestSession)]
+public class RedisLocksRunnerTests : HostedUnitTest
 {
     private readonly IRedisLocksRunner _util;
 
-    public RedisLocksRunnerTests(Fixture fixture, ITestOutputHelper output) : base(fixture, output)
+    public RedisLocksRunnerTests(Host host) : base(host)
     {
         _util = Resolve<IRedisLocksRunner>(true);
     }
 
-    [Fact]
+    [Test]
     public void Default()
     {
 
