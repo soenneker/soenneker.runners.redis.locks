@@ -22,6 +22,6 @@ public sealed class RedisLocksRunner : Runner.Runner, IRedisLocksRunner
 
     public Task ReleaseLocks(IEnumerable<string> lockNames, CancellationToken cancellationToken = default)
     {
-        return _redisLockUtil.UnlockAll(lockNames, cancellationToken);
+        return _redisLockUtil.ForceUnlockAll(lockNames, cancellationToken);
     }
 }
