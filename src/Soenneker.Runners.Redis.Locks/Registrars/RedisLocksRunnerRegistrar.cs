@@ -14,6 +14,8 @@ public static class RedisLocksRunnerRegistrar
     /// <summary>
     /// Adds <see cref="IRedisLocksRunner"/> as a singleton service. <para/>
     /// </summary>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddRedisLocksRunnerAsSingleton(this IServiceCollection services)
     {
         services.AddMsTeamsUtilAsSingleton().AddRedisLockUtilAsSingleton().TryAddSingleton<IRedisLocksRunner, RedisLocksRunner>();
@@ -24,6 +26,8 @@ public static class RedisLocksRunnerRegistrar
     /// <summary>
     /// Adds <see cref="IRedisLocksRunner"/> as a scoped service. <para/>
     /// </summary>
+    /// <param name="services">Service collection that receives the registration.</param>
+    /// <returns>The same service collection, so additional registrations can be chained.</returns>
     public static IServiceCollection AddRedisLocksRunnerAsScoped(this IServiceCollection services)
     {
         services.AddMsTeamsUtilAsScoped().AddRedisLockUtilAsScoped().TryAddScoped<IRedisLocksRunner, RedisLocksRunner>();

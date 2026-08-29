@@ -10,10 +10,10 @@ namespace Soenneker.Runners.Redis.Locks.Abstract;
 public interface IRedisLocksRunner
 {
     /// <summary>
-    /// Executes the release locks operation.
+    /// Releases locks for the Redis Locks Runner.
     /// </summary>
-    /// <param name="lockNames">The lock names.</param>
-    /// <param name="cancellationToken">The cancellation token.</param>
-    /// <returns>A task that represents the asynchronous operation.</returns>
+    /// <param name="lockNames">lock Names to process.</param>
+    /// <param name="cancellationToken">Token used to cancel the operation.</param>
+    /// <returns>A task that completes when the release locks operation is complete.</returns>
     Task ReleaseLocks(IEnumerable<string> lockNames, CancellationToken cancellationToken = default);
 }
