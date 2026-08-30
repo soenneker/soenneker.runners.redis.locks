@@ -5,15 +5,15 @@ using System.Threading.Tasks;
 namespace Soenneker.Runners.Redis.Locks.Abstract;
 
 /// <summary>
-/// A task runner that uses IRedisLockUtil to release a set of distributed Redis locks, typically when the application starts
+/// Clears a known set of stale distributed Redis locks during controlled recovery.
 /// </summary>
 public interface IRedisLocksRunner
 {
     /// <summary>
-    /// Releases locks for the Redis Locks Runner.
+    /// Forcibly removes each supplied Redis lock without checking its ownership token.
     /// </summary>
-    /// <param name="lockNames">lock Names to process.</param>
+    /// <param name="lockNames">Redis lock keys to remove.</param>
     /// <param name="cancellationToken">Token used to cancel the operation.</param>
-    /// <returns>A task that completes when the release locks operation is complete.</returns>
+    /// <returns>A task that completes when all supplied lock keys have been processed.</returns>
     Task ReleaseLocks(IEnumerable<string> lockNames, CancellationToken cancellationToken = default);
 }

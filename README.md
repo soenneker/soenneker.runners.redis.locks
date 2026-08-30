@@ -5,24 +5,46 @@
 
 # Soenneker.Runners.Redis.Locks
 
-A task runner that uses IRedisLockUtil to release a set of distributed Redis locks, typically when the application starts.
+A DI-ready runner for clearing a known set of stale distributed Redis locks.
 
-> This is an automation runner, not a package intended for application consumption.
+## Installation
 
-## What the runner does
+```bash
+dotnet add package Soenneker.Runners.Redis.Locks
+```
 
-- `IRedisLocksRunner.ReleaseLocks(lockNames, cancellationToken)` — Releases locks for the Redis Locks Runner.
-- `RedisLocksRunnerRegistrar.AddRedisLocksRunnerAsSingleton(services)` — Adds `IRedisLocksRunner` as a singleton service.
-- `RedisLocksRunnerRegistrar.AddRedisLocksRunnerAsScoped(services)` — Adds `IRedisLocksRunner` as a scoped service.
+## Registration
 
-## What you get
+```csharp
+using Soenneker.Runners.Redis.Locks.Registrars;
 
-- `IRedisLocksRunner` — A task runner that uses IRedisLockUtil to release a set of distributed Redis locks, typically when the application starts.
-- `RedisLocksRunnerRegistrar` — A task runner that uses IRedisLockUtil to release a set of distributed Redis locks, typically when the application starts.
+services.AddRedisLocksRunnerAsSingleton();
+```
 
-## API at a glance
+Scoped registration is also available:
 
-| API | What it does | Result / important behavior |
-| --- | --- | --- |
-| `RedisLocksRunnerRegistrar.AddRedisLocksRunnerAsSingleton(services)` | Adds `IRedisLocksRunner` as a singleton service. | The same service collection, so additional registrations can be chained. |
-| `RedisLocksRunnerRegistrar.AddRedisLocksRunnerAsScoped(services)` | Adds `IRedisLocksRunner` as a scoped service. | The same service collection, so additional registrations can be chained. |
+```csharp
+services.AddRedisLocksRunnerAsScoped();
+```
+
+Choose the lifetime that matches the service consuming the runner. The registrar also registers its Redis lock and Microsoft Teams dependencies with the same lifetime.
+
+## Usage
+
+```csharp
+using Soenneker.Runners.Redis.Locks.Abstract;
+
+public sealed class StartupRecovery(IRedisLocksRunner redisLocksRunner)
+{
+    public Task ClearStaleLocks(CancellationToken cancellationToken)
+    {
+        return redisLocksRunner.ReleaseLocks(
+            ["jobs:import", "jobs:export"],
+            cancellationToken);
+    }
+}
+```
+
+`ReleaseLocks` force-deletes each supplied Redis key without checking an ownership token. Use it only during controlled recovery when no valid owner can still be using those locks. It is not a substitute for releasing a normally acquired lock through its handle.
+
+Keys are processed sequentially. Cancellation or a Redis failure stops processing and is propagated to the caller, so keys earlier in the sequence may already have been removed.

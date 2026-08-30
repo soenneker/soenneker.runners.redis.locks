@@ -9,7 +9,6 @@ using System.Threading;
 
 namespace Soenneker.Runners.Redis.Locks;
 
-/// <inheritdoc cref="IRedisLocksRunner"/>
 public sealed class RedisLocksRunner : Runner.Runner, IRedisLocksRunner
 {
     private readonly IRedisLockUtil _redisLockUtil;
